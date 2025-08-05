@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import time
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 from src.logger import logging
 import os
 import sys
