@@ -22,6 +22,13 @@ git clone https://github.com/harikrishnansivadasan/Health_Monitoring_App.git
 cd Health_Monitoring_App
 ```
 
+### 2. **Run Locally**
+
+```bash
+streamlit run app.py
+```
+### OR
+
 ### 2. **Build Docker Image**
 
 ```bash
