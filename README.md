@@ -79,7 +79,7 @@ docker run -p 8501:8501 harikrishnansivadas/streamlit-app
 - Python 3.8+
 - Streamlit
 - Pandas, Numpy
-- scikit-learn (if model-based predictions used)
+- scikit-learn 
 
 Install with:
 
