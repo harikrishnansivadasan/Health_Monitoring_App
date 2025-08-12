@@ -53,14 +53,21 @@ try:
     i = 0
     while st.session_state.running == True and i < len(test_data):
         try:
-            row = test_data.iloc[[i]].drop(
-                columns=["Condition_Worsening"], errors="ignore"
-            )
+            row = test_data.iloc[[i]]
             input_data = row.copy()
 
             # Prediction
-            prediction = predictor.predict(input_data)[0]
-            logging.info(f"Prediction for row {i}: {prediction}")
+            prediction = predictor.predict(input_data)
+
+            # Get cluster prediction
+            cluster_label = prediction["clusters"]
+
+            # Get alerts (if any)
+            alert_status = prediction["alerts"]
+
+            logging.info(
+                f"Prediction for row {i}: {cluster_label} and alert is : {alert_status}"
+            )
 
             # Blood Pressure Chart
             # bp_fig = go.Figure()
@@ -186,16 +193,17 @@ try:
                     )
 
             # Risk Alert
-            if prediction == 1:
-                alert_box.error("⚠️ Health Risk Detected: Condition Likely to Worsen")
+            if cluster_label == 0:
+                alert_box.success(alert_status)
+
             else:
-                alert_box.success("✅ Stable Condition")
+                alert_box.error(alert_status)
 
             time.sleep(1.7)
             i += 1
 
-        except Exception as inner_e:
-            logging.error(f"Error in row {i} prediction: {inner_e}")
+        except Exception as e:
+            logging.error(f"Error in row {i} prediction: {e}")
             alert_box.warning("⚠️ Error processing this record. Check logs.")
             continue
 

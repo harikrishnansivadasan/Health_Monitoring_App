@@ -21,7 +21,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info("Entered data ingestion method")
         try:
-            df = pd.read_csv(r"data\bp.csv")
+            df = pd.read_csv(r"data\health_df.csv")
             logging.info("Read the dataset as df")
 
             os.makedirs(
@@ -43,6 +43,7 @@ class DataIngestion:
             return (
                 self.ingestion_config.train_data_path,
                 self.ingestion_config.test_data_path,
+                self.ingestion_config.raw_data_path
             )
         except Exception as e:
             raise CustomException(e, sys)
